@@ -1,19 +1,22 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-const serviceAccount = require('./secret/firebase_admin.json');
+const lineMainRoute = require('./src/line_main_route');
+const buttonTest = require('./src/test_route/button_test');
+const askForSharing = require('./src/cron_jobs/ask_for_sharing');
+const buttonPressed = require('./src/button/button_pressed');
 
-const buttonHelp = require('./routes/button_help');
-const buttonHelp2 = require('./routes/button_help2');
-const linePushNotif = require('./routes/line_push_notif');
-const lineBot = require('./routes/line_bot');
+const serviceAccount = require('./src/secret/firebase_admin.json');
+const { databaseURL } = require('./src/secret/firebase_database');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://hackathon-9ad8e.firebaseio.com"
+    databaseURL
 });
 
-exports.buttonHelp = functions.https.onRequest(buttonHelp);
-exports.buttonHelp2 = functions.https.onRequest(buttonHelp2);
-exports.linePushNotif = functions.https.onRequest(linePushNotif);
-exports.lineBot = functions.https.onRequest(lineBot);
+exports.lineMainRoute = functions.https.onRequest(lineMainRoute);
+exports.buttonTest = functions.https.onRequest(buttonTest);
+
+exports.askForSharing = functions.https.onRequest(askForSharing);
+
+exports.buttonPressed = functions.https.onRequest(buttonPressed);
