@@ -9,6 +9,10 @@ module.exports = (req, res) => {
 
     if (`${arrWord[0]} ${arrWord[1]}`.toLowerCase() === 'sorella button' && arrWord[2]) {
         addUserButton(req, res);
+    } else if (`${arrWord[0]} ${arrWord[1]}`.toLowerCase() === 'sorella phone' && arrWord[2]) {
+        if (arrWord[2].toLowerCase() === 'add' && arrWord[3]) {
+
+        }
     } else {
         sendError(res, 'Message not recognized');
     }
